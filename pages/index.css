@@ -73,3 +73,42 @@
   background-image: center;
   margin-right: 24px;
 }
+
+.cards {
+  /* font-size: 24px;
+  font-weight: 900;
+  line-height: 29.05px; */
+}
+
+.card__list {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 282px);
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card__photo {
+  height: 282px;
+  width: 282px;
+}
+
+.card__description {
+  display: flex;
+  background-color: #fff;
+  color: black;
+  padding: 25px 20px 20px 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card__like-button {
+  background: url(../images/heart.svg) center no-repeat;
+  height: 18px;
+  width: 21px;
+}
