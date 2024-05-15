@@ -78,24 +78,29 @@
   /* font-size: 24px;
   font-weight: 900;
   line-height: 29.05px; */
+  margin-top: 30px;
+}
+
+.card__photo {
+  height: 282px;
+  width: 282px;
 }
 
 .card__list {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 282px);
-  margin: 0;
+  grid-gap: 20px 17px;
   padding: 0;
+  margin: 0;
 }
 
 .card {
   display: flex;
+  border-radius: 10px;
   flex-direction: column;
-}
-
-.card__photo {
-  height: 282px;
-  width: 282px;
+  list-style: none;
+  border-radius: 10px 10px;
 }
 
 .card__description {
