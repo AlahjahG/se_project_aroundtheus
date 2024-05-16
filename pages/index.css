@@ -18,6 +18,8 @@
 
 .header {
   margin-top: 45px;
+  border-bottom: solid #fff 1px;
+  padding-bottom: 41px;
 }
 
 .profile {
@@ -116,4 +118,35 @@
   background: url(../images/heart.svg) center no-repeat;
   height: 18px;
   width: 21px;
+}
+
+@media screen and (max-width: 480px) {
+  .profile {
+    background-color: blueviolet;
+    flex-direction: column;
+    border-top: solid #fff 1px;
+  }
+
+  .profile__info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .profile__description {
+    width: 100%;
+    text-align: center;
+  }
+
+  .profile__add-button {
+    margin: 0;
+    width: 282px;
+    height: 50px;
+  }
+
+  .profile__edit-button {
+    align-items: center;
+    margin: 10px;
+  }
 }
