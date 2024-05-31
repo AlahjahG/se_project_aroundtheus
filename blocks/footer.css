@@ -1,0 +1,18 @@
+.footer {
+  opacity: 0.3;
+}
+
+.footer__container {
+  max-width: 318px;
+  height: 18px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.footer__title {
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  margin: 0;
+}
