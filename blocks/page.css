@@ -15,3 +15,42 @@
   flex-direction: column;
   min-height: 100vh;
 }
+
+@media screen and (max-width: 1100px) and (min-width: 1099px) {
+  .page__section {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
+
+  .page__info {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 884px) {
+  .page__section {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
+}
+
+@media screen and (max-width: 775px) and (min-width: 774px) {
+  .page__section {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
+}
+
+@media screen and (max-width: 562px) {
+  .page__section {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
+}
+
+@media screen and (max-width: 562px) {
+  .page__section {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
+}
