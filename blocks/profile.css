@@ -66,70 +66,86 @@
   margin-right: 24px;
 }
 
-@media screen and (max-width: 884px) {
-  .profile {
-    margin-bottom: 20px;
-  }
-}
-
 @media screen and (max-width: 800px) {
-  .profile {
-    flex-direction: column;
-    border-bottom: solid 1px rgba(250, 250, 250);
-  }
-
   .profile__info {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
   }
+}
 
-  .profile__description {
-    width: 100%;
-    text-align: center;
+@media screen and (max-width: 600px) {
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
   }
 
-  .profile__add-button {
-    margin-left: 0;
+  .profile__info {
+    display: flex;
+    align-items: center;
+
     width: 100%;
-    padding: 0;
+    white-space: nowrap;
   }
 
   .profile__edit-button {
-    align-items: center;
-    margin: 10px;
+    margin-left: auto;
+    margin: 0;
+  }
+
+  .profile__add-button {
+    width: 282px;
+    margin: 0;
+  }
+
+  .profile__title {
+    width: 192px;
+    font-size: 20px;
+    padding: 0;
+  }
+
+  .profile__photo {
+    margin: 0 0 10px;
+  }
+
+  .profile__description {
+    font-size: 14px;
   }
 }
 
-@media screen and (max-width: 775px) and (min-width: 774px) {
-  .profile__info {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-  }
+@media screen and (max-width: 320px) {
   .profile {
-    margin-bottom: 20px;
-  }
-  .profile__title {
-    max-width: 192px;
-    font-size: 22px;
-    line-height: 27px;
-  }
-}
-
-@media screen and (max-width: 562px) {
-  .profile__info {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
-    width: 100%;
   }
 
   .profile__title {
-    font-size: 32px;
+    font-size: 20px;
     padding: 0;
     text-align: center;
+    width: 192px;
+    margin-bottom: 10px;
+  }
+
+  .profile__edit-button {
+    margin: 0;
+  }
+
+  .profile__add-button {
+    width: 282px;
+  }
+
+  .profile__photo {
+    margin: 0 0 10px;
+  }
+
+  .profile__description {
+    font-size: 14px;
   }
 }
