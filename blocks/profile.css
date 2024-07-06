@@ -60,6 +60,10 @@
   font-weight: 400;
   line-height: 22px;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
   grid-area: description;
 }
 
