@@ -26,24 +26,3 @@
     margin-bottom: 20px;
   }
 }
-
-@media screen and (max-width: 884px) {
-  .page__section {
-    margin: 0 20px;
-    max-width: calc(100% - 40px);
-  }
-}
-
-@media screen and (max-width: 620px) {
-  .page__section {
-    margin: 0 20px;
-    max-width: calc(100% - 40px);
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .page__section {
-    margin: 0 20px;
-    max-width: calc(100% - 40px);
-  }
-}

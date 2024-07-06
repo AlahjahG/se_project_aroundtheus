@@ -32,6 +32,11 @@
   width: 23px;
   list-style: none;
   border: none;
+  cursor: url(../images/Cursor_1.svg) 1 2, pointer;
+}
+
+.card__like-button:hover {
+  opacity: 60%;
 }
 
 .card__photo {
