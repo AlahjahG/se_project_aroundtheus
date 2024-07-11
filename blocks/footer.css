@@ -1,6 +1,6 @@
 .footer {
-  padding-top: 48px;
-  padding-bottom: 36px;
+  padding-top: 67px;
+  padding-bottom: 60px;
 }
 
 .footer__title {
@@ -10,4 +10,27 @@
   font-size: 18px;
   line-height: 21.78px;
   margin: 0;
+}
+
+@media screen and (max-width: 669px) {
+  .footer__title {
+    font-size: 14px;
+    line-height: 16.94px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer {
+    margin: 48px 19px 27px;
+  }
+
+  .footer__title {
+    font-size: 14px;
+    line-height: 16.94px;
+  }
+
+  .page__section {
+    padding: 0;
+    width: 100%;
+  }
 }
