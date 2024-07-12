@@ -21,16 +21,12 @@
 
 @media screen and (max-width: 320px) {
   .footer {
-    margin: 48px 19px 27px;
+    margin: 48px 19px 27px 19px;
+    padding: 0;
   }
 
   .footer__title {
     font-size: 14px;
     line-height: 16.94px;
-  }
-
-  .page__section {
-    padding: 0;
-    width: 100%;
   }
 }
