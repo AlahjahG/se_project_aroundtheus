@@ -10,12 +10,6 @@
   position: relative;
 }
 
-.page__content {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
 @media screen and (max-width: 1200px) {
   .page__section {
     margin: 0 20px;
