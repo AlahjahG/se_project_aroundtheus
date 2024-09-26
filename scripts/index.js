@@ -1,4 +1,4 @@
-const intianlsCards = [
+const intianlCards = [
   {
     title: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -27,4 +27,4 @@ const intianlsCards = [
   },
 ];
 
-console.log = intianlsCards[0];
+console.log = intianlCards[1];
