@@ -1,3 +1,7 @@
+.modal_opened {
+  visibility: visible;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -31,6 +35,10 @@
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+}
+
+.modal__close:hover {
+  opacity: 0.5;
 }
 
 .modal__form {
