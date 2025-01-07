@@ -1,5 +1,9 @@
-.modal_opened {
+#profile-edit-modal.modal_opened {
   visibility: visible;
+}
+
+#profile-edit-modal {
+  visibility: hidden;
 }
 
 .modal {
