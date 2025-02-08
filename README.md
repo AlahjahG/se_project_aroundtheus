@@ -2,7 +2,7 @@
 
 1. Around the US
 2. This web application allow users to post, share and like photos
-3. This is an HTML and CSS web appliction.
+3. This is an HTML, CSS and Javascript web appliction.
 
 ### Overview
 
