@@ -56,7 +56,7 @@
   display: flex;
   align-items: center;
   border-style: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 28px;
   position: relative;
@@ -98,40 +98,56 @@
   .modal__container {
     width: 282px;
     height: 323px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
   }
 
   .modal__button {
+    width: 238px;
+    height: 46px;
     font-size: 14px;
     font-weight: 400;
     position: relative;
-    top: 155px;
+    top: 64px;
+    left: 23px;
+    padding: 0;
   }
 
   .modal__close {
     width: 26px;
     height: 26px;
-    left: 329.62px;
-    top: -43px;
+    left: 24gi4.62px;
+    top: -48px;
   }
 
   .modal__heading {
-    width: 238px;
+    width: 282px;
     font-size: 18px;
     line-height: 22px;
     position: absolute;
-    top: 2px;
-    left: 36px;
+    top: 10px;
+    left: 19px;
   }
 
   .modal__form {
     position: relative;
-    top: 75px;
   }
 
   .modal__form-input {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    width: 238px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     font-size: 14px;
     font-family: "Inter", Arial, sans-serif;
     font-weight: 400;
+    padding: 0;
+    left: 23px;
+  }
+}
+
+@media screen and(max-width: 320px) {
+  .modal__container {
+    padding: 0;
   }
 }
