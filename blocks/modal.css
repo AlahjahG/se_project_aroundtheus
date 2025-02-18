@@ -19,7 +19,7 @@
 
 .modal__container {
   position: relative;
-  padding: 36px;
+  padding: 0;
   width: 430px;
   height: 330px;
   background-color: #fff;
@@ -57,10 +57,13 @@
   align-items: center;
   border-style: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  width: 100%;
+  width: 358px;
   height: 28px;
   position: relative;
   margin-top: 25px;
+  padding: 0;
+  top: 14px;
+  left: 34px;
 }
 
 .modal__button {
@@ -70,7 +73,7 @@
   border-radius: 2px;
   text-decoration: none;
   text-align: center;
-  width: 100%;
+  width: 358px;
   height: 50.15px;
   position: relative;
   display: inline-block;
@@ -78,7 +81,9 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 21.87px;
-  top: 135px;
+  top: 76px;
+  left: 34px;
+  padding: 0;
 }
 
 .modal__heading {
@@ -91,7 +96,7 @@
   height: 23px;
   color: #000;
   position: relative;
-  top: -25px;
+  left: 32px;
 }
 
 @media screen and (max-width: 660px) {
