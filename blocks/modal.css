@@ -1,11 +1,3 @@
-#profile-edit-modal.modal_opened {
-  visibility: visible;
-}
-
-#profile-edit-modal {
-  visibility: hidden;
-}
-
 .modal {
   position: fixed;
   top: 0;
@@ -15,6 +7,11 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
   display: flex;
+  visibility: hidden;
+}
+
+.modal_opened {
+  visibility: visible;
 }
 
 .modal__container {
@@ -96,7 +93,7 @@
   height: 23px;
   color: #000;
   position: relative;
-  left: 32px;
+  margin-left: 32px;
 }
 
 @media screen and (max-width: 660px) {
@@ -131,9 +128,9 @@
     width: 282px;
     font-size: 18px;
     line-height: 22px;
-    position: absolute;
+    position: relative;
     top: 10px;
-    left: 19px;
+    margin-left: 19px;
   }
 
   .modal__form {
