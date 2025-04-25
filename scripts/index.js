@@ -97,7 +97,7 @@ function handleAddCardFormSubmit(e) {
   const link = cardImageInput.value;
 
   renderCard({ name, link });
-  console.log(cardElement);
+
   closePopup();
 }
 
@@ -128,4 +128,11 @@ addCardBtn.addEventListener("click", () => {
 
 profileCardCloseModal.addEventListener("click", () => {
   closePopup();
+});
+
+const likeCardBtns = document.querySelectorAll(".card__like-button");
+likeCardBtns.forEach((likeCardBtn) => {
+  likeCardBtn.addEventListener("click", () => {
+    likeCardBtn.classList.toggle("card__like-button_active");
+  });
 });
