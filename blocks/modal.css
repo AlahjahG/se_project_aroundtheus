@@ -96,6 +96,11 @@
   margin-left: 32px;
 }
 
+.modal__image {
+  width: 433px;
+  height: 540px;
+}
+
 @media screen and (max-width: 660px) {
   .modal__container {
     width: 282px;

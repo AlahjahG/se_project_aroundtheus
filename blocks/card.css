@@ -43,6 +43,23 @@
   opacity: 0.5;
 }
 
+.card__delete-button {
+  background: url(../images/Trash.svg) center no-repeat;
+  height: 18px;
+  width: 23px;
+  list-style: none;
+  border: none;
+  padding: 0;
+  cursor: url(../images/Cursor_1.svg) 1 2, pointer;
+  position: relative;
+  top: 25px;
+  left: 246px;
+}
+
+.card__delete-button:hover {
+  opacity: 0.5;
+}
+
 .card__photo {
   height: 282px;
   width: 282px;

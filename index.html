@@ -92,8 +92,17 @@
         </form>
       </div>
     </div>
+    < !- - Modal for image preview - ->
+    <div class="modal" id="profile-image-modal">
+      <div class="modal__container">
+        <button class="modal__close" id="profile-close-image-modal"></button>
+        <img class="modal__image" src="" alt="" />
+        <p class="modal__image-title"></p>
+      </div>
+    </div>
     <template id="card__template">
       <li class="card">
+        <button class="card__delete-button" type="button"></button>
         <img src="" alt="" class="card__photo" />
         <div class="card__description">
           <h2 class="card__title"></h2>

@@ -50,9 +50,8 @@ const cardDescriptionInput = document.querySelector("#card-description-input");
 const cardImageInput = document.querySelector("#card-image-input");
 const cardDescription = document.querySelector(".card__description");
 
-const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
-);
+const modalPreviewImage = document.querySelector("#profile-image-modal");
+
 const cardListEl = document.querySelector(".cards__list");
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 const profileCardForm = profileCardModal.querySelector(".modal__form");
@@ -76,6 +75,29 @@ function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__photo");
   const cardTitleEl = cardElement.querySelector(".card__title");
+  const likeCardBtn = cardElement.querySelector(".card__like-button");
+  const deleteCardBtn = cardElement.querySelector(".card__delete-button");
+  const previewImage = cardElement.querySelector(".modal__image");
+  const previewTitle = cardElement.querySelector(".modal__image-title");
+
+  cardImageEl.addEventListener("click", () => {
+    modalPreviewImage.classList.add("modal_opened");
+    previewImage.src = cardData.link;
+    console.log(cardData.link);
+    previewTitle.textContent = cardData.name;
+    previewImage.alt = cardData.name;
+  });
+
+  deleteCardBtn.addEventListener("click", (e) => {
+    const card = e.target.closest(".card");
+    card.remove();
+    console.log("Card deleted");
+  });
+
+  likeCardBtn.addEventListener("click", () => {
+    likeCardBtn.classList.toggle("card__like-button_active");
+  });
+
   cardTitleEl.textContent = cardData.name;
   cardImageEl.alt = cardData.name;
   cardImageEl.src = cardData.link;
@@ -131,8 +153,4 @@ profileCardCloseModal.addEventListener("click", () => {
 });
 
 const likeCardBtns = document.querySelectorAll(".card__like-button");
-likeCardBtns.forEach((likeCardBtn) => {
-  likeCardBtn.addEventListener("click", () => {
-    likeCardBtn.classList.toggle("card__like-button_active");
-  });
-});
+likeCardBtns.forEach((likeCardBtn) => {});
