@@ -1,4 +1,4 @@
-var initialCards = [
+const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -159,6 +159,3 @@ profileCardCloseModal.addEventListener("click", () => {
 closeModalPreviewBtn.addEventListener("click", () => {
   closePopup();
 });
-
-const likeCardBtns = document.querySelectorAll(".card__like-button");
-likeCardBtns.forEach((likeCardBtn) => {});

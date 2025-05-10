@@ -3,7 +3,9 @@
   border-radius: 10px;
   flex-direction: column;
   list-style: none;
+  border-radius: 8px;
   overflow: hidden;
+  position: relative;
 }
 
 .card__description {
@@ -51,9 +53,9 @@
   border: none;
   padding: 0;
   cursor: url(../images/Cursor_1.svg) 1 2, pointer;
-  position: relative;
+  position: absolute;
   top: 25px;
-  left: 246px;
+  right: 246px;
 }
 
 .card__delete-button:hover {
