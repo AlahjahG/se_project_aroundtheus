@@ -70,6 +70,12 @@ function closePopup() {
   modalPreviewImage.classList.remove("modal_opened");
 }
 
+function openPopup() {
+  profileEditModal.classList.add("modal_opened");
+  modalPreviewImage.classList.add("modal_opened");
+  profileCardModal.classList.add("modal_opened");
+}
+
 function renderCard(cardData, Wrapper) {
   const cardElement = getCardElement(cardData);
   cardsWrap.prepend(cardElement);
@@ -92,10 +98,8 @@ function getCardElement(cardData) {
     previewImage.alt = cardData.name;
   });
 
-  deleteCardBtn.addEventListener("click", (e) => {
-    const card = e.target.closest(".card");
-    card.remove();
-    console.log("Card deleted");
+  deleteCardBtn.addEventListener("click", () => {
+    cardElement.remove();
   });
 
   likeCardBtn.addEventListener("click", () => {
@@ -125,6 +129,8 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link });
 
   closePopup();
+  cardTitleInput.value = "";
+  cardImageInput.value = "";
 }
 
 // Event Listeners //
