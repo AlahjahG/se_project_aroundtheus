@@ -118,7 +118,7 @@
   position: relative;
 }
 
-.modal__container_preview-image {
+.modal__container-preview {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -176,7 +176,7 @@
     width: 282px;
     font-size: 18px;
     line-height: 22px;
-    position: relative;
+    position: rbelative;
     margin-left: 19px;
   }
 
@@ -194,7 +194,7 @@
     padding: 0;
   }
 
-  .modal__container_preview-image {
+  .modal__container-preview {
     width: 282px;
     height: 323px;
     margin: auto;
@@ -224,5 +224,16 @@
 @media screen and (max-width: 320px) {
   .modal__container {
     padding: 0;
+  }
+
+  .modal__close-image {
+    top: -10px;
+    right: -5px;
+    margin: 0;
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 100%;
   }
 }

@@ -54,8 +54,8 @@
   padding: 0;
   cursor: url(../images/Cursor_1.svg) 1 2, pointer;
   position: absolute;
-  top: 25px;
-  right: 246px;
+  top: 18px;
+  right: 15px;
 }
 
 .card__delete-button:hover {

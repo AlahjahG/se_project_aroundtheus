@@ -88,7 +88,7 @@ function getCardElement(cardData) {
   const previewTitle = document.querySelector(".modal__image-title");
 
   cardImageEl.addEventListener("click", () => {
-    modalPreviewImage.classList.add("modal_opened");
+    openPopup(modalPreviewImage);
     previewImage.src = cardData.link;
     previewTitle.textContent = cardData.name;
     previewImage.alt = cardData.name;
