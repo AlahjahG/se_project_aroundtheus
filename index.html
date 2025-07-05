@@ -52,21 +52,31 @@
         <p class="modal__heading">Edit Profile</p>
         <form class="modal__form" id="edit-profile-form">
           <input
-            required
             class="modal__form-input"
             id="profile-title-input"
-            placeholder="Jacques Cousteau "
+            placeholder="Name"
             type="text"
             name="title"
-          />
-          <input
+            minlength="2"
+            maxlength="40"
             required
+          />
+          <span class="modal__error_visible" id="profile-title-input_error">
+          </span>
+          <input
             class="modal__form-input"
             id="profile-description-input"
-            placeholder=" Explorer"
+            placeholder="Description"
             type="text"
             name="description"
+            minlength="2"
+            maxlength="400"
+            required
           />
+          <span
+            class="modal__error_visible"
+            id="profile-description-input_error"
+          ></span>
           <button class="modal__button" type="submit">Save</button>
         </form>
       </div>

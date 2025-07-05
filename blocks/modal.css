@@ -67,6 +67,12 @@
   padding: 0;
 }
 
+.modal__input_type_error {
+  border-bottom: 1px solid red;
+  width: 358px;
+  height: 28px;
+}
+
 .modal__button {
   background-color: #000;
   color: white;
@@ -143,6 +149,15 @@
 
 .modal__close-image:hover {
   opacity: 0.5;
+}
+.modal__error_visible {
+  color: red;
+  font-size: 14px;
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  position: absolute;
+  bottom: 186px;
+  left: 32px;
 }
 
 @media screen and (max-width: 660px) {
