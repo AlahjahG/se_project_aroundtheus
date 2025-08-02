@@ -28,14 +28,47 @@ function checkInputValidity(formElement, inputElement, options) {
   }
 }
 
+function toggleButtonState(inputElements, submitButtonElement, options) {
+  let foundInvalid = false;
+  inputElements.forEach((inputElement) => {
+    if (!inputElement.validity.valid) {
+      foundInvalid = true;
+    }
+  });
+  // The inputElement parameter should be inputElements (an array), not a single element.
+  // So, replace inputElement.forEach(...) with inputElements.forEach(...)
+  if (foundInvalid) {
+    submitButtonElement.classList.add(options.inactiveButtonClass);
+    submitButtonElement.disabled = true;
+  } else {
+    submitButtonElement.classList.remove(options.inactiveButtonClass);
+    submitButtonElement.disabled = false;
+  }
+}
+
 function setEventListeners(formElement, options) {
   const { inputSelector } = options;
-  const inputElement = [...formElement.querySelectorAll(options.inputSelector)];
-  inputElement.forEach((inputElement) => {
+  const inputElements = [
+    ...formElement.querySelectorAll(options.inputSelector),
+  ];
+  const submitButtonElement = formElement.querySelector(
+    options.submitButtonSelector
+  );
+  inputElements.forEach((inputElement) => {
     inputElement.addEventListener("input", (e) => {
       checkInputValidity(formElement, inputElement, options);
+      toggleButtonState(inputElements, submitButtonElement, options);
     });
   });
+
+  const closeModal = formElement.querySelector(
+    options.formSelector + " .modal__close"
+  );
+  if (closeModal) {
+    closeModal.addEventListener("click", () => {
+      closePopup(formElement.closest(".modal"));
+    });
+  }
 }
 
 function enableValidation(options) {

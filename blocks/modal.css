@@ -91,6 +91,11 @@
   margin: 65px 36px 36.51px;
   padding: 0;
 }
+.modal__button_disabled {
+  background-color: #bdbdbd;
+  color: #4f4f4f;
+  cursor: not-allowed;
+}
 
 .modal__heading {
   font-family: "Inter", Arial, sans-serif;
@@ -156,8 +161,14 @@
   font-family: "Inter", Arial, sans-serif;
   font-weight: 400;
   position: absolute;
-  bottom: 186px;
+  top: 55px;
   left: 32px;
+  width: 358px;
+  height: 16px;
+}
+
+.modal__label {
+  position: relative;
 }
 
 @media screen and (max-width: 660px) {

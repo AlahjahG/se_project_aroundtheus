@@ -72,6 +72,25 @@ function openPopup(modal) {
   modal.classList.add("modal_opened");
 }
 
+function handleEscUp(evt) {
+  if (evt.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    if (openedModal) {
+      closePopup(openedModal);
+    }
+  }
+}
+
+function openPopup(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscUp);
+}
+
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscUp);
+}
+
 function renderCard(cardData, Wrapper) {
   const cardElement = getCardElement(cardData);
   cardsWrap.prepend(cardElement);
@@ -160,4 +179,12 @@ profileCardCloseModal.addEventListener("click", () => {
 
 closeModalPreviewBtn.addEventListener("click", () => {
   closePopup(modalPreviewImage);
+});
+
+document.querySelectorAll(".modal").forEach((modal) => {
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closePopup(modal);
+    }
+  });
 });
