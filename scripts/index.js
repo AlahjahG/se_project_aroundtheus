@@ -159,6 +159,7 @@ profileEditBtn.addEventListener("click", () => {
 
 closeProfileModal.addEventListener("click", () => {
   closePopup(profileEditModal);
+  modal.reset(profileEditModal);
 });
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);

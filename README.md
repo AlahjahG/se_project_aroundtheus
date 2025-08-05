@@ -2,9 +2,9 @@
 
 1. Around the US
 2. This web application allow users to post, share and like photos
-3. This is an HTML, CSS and Javascript web appliction.
+3. The technology used is HTML, CSS and Javascript. One technique used is object destructring.
 
-### Overview
+### Overviews
 
 - Intro
 - Figma
