@@ -62,15 +62,15 @@
   width: 358px;
   height: 28px;
   position: relative;
-  margin-top: 25px;
-  margin-left: 32px;
+  margin-top: 23px;
+  margin-left: 28px;
   padding: 0;
 }
 
 .modal__input_type_error {
   border-bottom: 1px solid red;
   width: 358px;
-  height: 28px;
+  height: 30px;
 }
 
 .modal__button {
@@ -167,6 +167,10 @@
 }
 
 .modal__label {
+  display: block;
+  padding-top: 1px;
+  height: 60px;
+
   position: relative;
 }
 
