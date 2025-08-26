@@ -25,11 +25,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 0;
   width: 430px;
   height: 330px;
   background-color: #fff;
-  margin: auto;
   border-radius: 10px;
 }
 
@@ -60,10 +58,10 @@
   border-style: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   width: 358px;
-  height: 28px;
+  height: 30px;
   position: relative;
-  margin-top: 23px;
-  margin-left: 28px;
+  left: 30px;
+  top: 25px;
   padding: 0;
 }
 
@@ -88,7 +86,8 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 21.87px;
-  margin: 65px 36px 36.51px;
+  left: 30px;
+  top: 60px;
   padding: 0;
 }
 .modal__button_disabled {
@@ -157,11 +156,11 @@
 }
 .modal__error_visible {
   color: red;
-  font-size: 14px;
+  font-size: 12px;
   font-family: "Inter", Arial, sans-serif;
   font-weight: 400;
   position: absolute;
-  top: 55px;
+  top: 58px;
   left: 32px;
   width: 358px;
 }
@@ -180,7 +179,6 @@
     height: 323px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 0;
   }
 
@@ -191,7 +189,8 @@
     font-weight: 400;
     position: relative;
     padding: 0;
-    margin: 67px 22px 25px;
+    left: 20px;
+    top: 40px;
   }
 
   .modal__close {
@@ -205,7 +204,7 @@
     width: 282px;
     font-size: 18px;
     line-height: 22px;
-    position: rbelative;
+    position: relative;
     margin-left: 19px;
   }
 
@@ -219,7 +218,8 @@
     font-size: 14px;
     font-family: "Inter", Arial, sans-serif;
     font-weight: 400;
-    margin-left: 19px;
+    left: 20px;
+    top: 30px
     padding: 0;
   }
 
@@ -248,6 +248,17 @@
     line-height: 100%;
     color: #ffffff;
   }
+
+  .modal__error_visible {
+    font-size: 11px;
+    top: 60px;
+    left: 19px;
+    width: 238px;
+  }
+
+  .modal__input_type_error {
+    border-bottom: 1px solid red;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -264,5 +275,19 @@
     font-size: 12px;
     font-weight: 400;
     line-height: 100%;
+  }
+
+  .modal__error_visible {
+    top: 50px;
+    left: 20px;
+    width: 240px;
+  }
+
+  .modal__error_visible {
+    font-size: 11px;
+
+    top: 58px;
+    left: 19px;
+    width: 238px;
   }
 }

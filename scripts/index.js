@@ -66,10 +66,12 @@ const cardTemplate =
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscUp);
 }
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscUp);
 }
 
 function handleEscUp(evt) {
@@ -79,16 +81,6 @@ function handleEscUp(evt) {
       closePopup(openedModal);
     }
   }
-}
-
-function openPopup(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", handleEscUp);
-}
-
-function closePopup(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", handleEscUp);
 }
 
 function renderCard(cardData, Wrapper) {
