@@ -71,6 +71,19 @@ function setEventListeners(formElement, options) {
   }
 }
 
+function resetValidation(formElement, options) {
+  const inputElements = [
+    ...formElement.querySelectorAll(options.inputSelector),
+  ];
+  const submitButtonElement = formElement.querySelector(
+    options.submitButtonSelector
+  );
+  inputElements.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, options);
+  });
+  toggleButtonState(inputElements, submitButtonElement, options);
+}
+
 function enableValidation(options) {
   const formElements = [...document.querySelectorAll(".modal__form")];
 

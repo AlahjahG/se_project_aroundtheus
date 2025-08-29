@@ -151,7 +151,6 @@ profileEditBtn.addEventListener("click", () => {
 
 closeProfileModal.addEventListener("click", () => {
   closePopup(profileEditModal);
-  modal.reset(profileEditModal);
 });
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
@@ -168,6 +167,8 @@ addCardBtn.addEventListener("click", () => {
 
 profileCardCloseModal.addEventListener("click", () => {
   closePopup(profileCardModal);
+  resetValidation(profileCardForm, config);
+  profileCardForm.reset();
 });
 
 closeModalPreviewBtn.addEventListener("click", () => {
