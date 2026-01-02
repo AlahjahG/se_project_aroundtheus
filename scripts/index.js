@@ -1,3 +1,6 @@
+import FormValidator from "./FormValidator.js";
+import Card from "./Card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -29,7 +32,16 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-console.log(initialCards);
+
+// Form Validation //
+const cardData = {
+  name: "Lago di Braies",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+};
+
+const card = new Card(cardData);
+
+// Constants //
 
 const cardsWrap = document.querySelector(".cards__list");
 const profileEditBtn = document.querySelector("#profile-edit-button");
@@ -140,19 +152,41 @@ function handleAddCardFormSubmit(e) {
   profileCardForm.reset();
 }
 
+// Form Validation //
+const validateSettings = {
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+// Initialize form validators
+const profileEditFormValidator = new FormValidator(
+  validateSettings,
+  profileEditForm
+);
+profileEditFormValidator.enableValidation();
+
+const profileCardFormValidator = new FormValidator(
+  validateSettings,
+  profileCardForm
+);
+profileCardFormValidator.enableValidation();
+
 // Event Listeners //
 
 profileEditBtn.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  resetValidation(profileEditForm, config);
+  resetValidation(profileEditForm, validateSettings);
 
   openPopup(profileEditModal);
 });
 
 closeProfileModal.addEventListener("click", () => {
   closePopup(profileEditModal);
-  resetValidation(profileEditForm, config);
+  resetValidation(profileEditForm, validateSettings);
   profileEditForm.reset();
 });
 
@@ -170,7 +204,7 @@ addCardBtn.addEventListener("click", () => {
 
 profileCardCloseModal.addEventListener("click", () => {
   closePopup(profileCardModal);
-  resetValidation(profileCardForm, config);
+  resetValidation(profileCardForm);
   profileCardForm.reset();
 });
 
