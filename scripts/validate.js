@@ -106,3 +106,5 @@ const config = {
 };
 
 enableValidation(config);
+
+export { resetValidation };

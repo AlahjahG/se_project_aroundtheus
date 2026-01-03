@@ -1,5 +1,6 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
+import { resetValidation } from "./validate.js";
 
 const initialCards = [
   {
