@@ -205,7 +205,7 @@ addCardBtn.addEventListener("click", () => {
 
 profileCardCloseModal.addEventListener("click", () => {
   closePopup(profileCardModal);
-  resetValidation(profileCardForm);
+  resetValidation(profileCardForm, validateSettings);
   profileCardForm.reset();
 });
 
