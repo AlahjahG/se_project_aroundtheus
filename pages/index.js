@@ -1,6 +1,5 @@
-import FormValidator from "./FormValidator.js";
-import Card from "./Card.js";
-import { resetValidation } from "./validate.js";
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
 
 const initialCards = [
   {
@@ -35,12 +34,6 @@ const initialCards = [
 ];
 
 // Form Validation //
-const cardData = {
-  name: "Lago di Braies",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-};
-
-const card = new Card(cardData);
 
 // Constants //
 
@@ -97,7 +90,8 @@ function handleEscUp(evt) {
 }
 
 function renderCard(cardData, Wrapper) {
-  const cardElement = getCardElement(cardData);
+  const card = new Card(cardData, cardTemplate);
+  const cardElement = card.getCardElement();
   cardsWrap.prepend(cardElement);
 }
 
@@ -180,14 +174,14 @@ profileCardFormValidator.enableValidation();
 profileEditBtn.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  resetValidation(profileEditForm, validateSettings);
+  profileEditFormValidator.resetValidation(profileEditForm);
 
   openPopup(profileEditModal);
 });
 
 closeProfileModal.addEventListener("click", () => {
   closePopup(profileEditModal);
-  resetValidation(profileEditForm, validateSettings);
+  profileEditFormValidator.resetValidation(profileEditForm);
   profileEditForm.reset();
 });
 
@@ -205,7 +199,7 @@ addCardBtn.addEventListener("click", () => {
 
 profileCardCloseModal.addEventListener("click", () => {
   closePopup(profileCardModal);
-  resetValidation(profileCardForm, validateSettings);
+  profileCardFormValidator.resetValidation(profileCardForm);
   profileCardForm.reset();
 });
 
