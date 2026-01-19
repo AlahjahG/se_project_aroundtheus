@@ -83,6 +83,14 @@ function handleEscUp(evt) {
     const openedModal = document.querySelector(".modal_opened");
     if (openedModal) {
       closePopup(openedModal);
+
+      if (openedModal.id === "profile-edit-modal") {
+        profileEditFormValidator.resetValidation();
+        profileEditForm.reset();
+      } else if (openedModal.id === "profile-card-modal") {
+        profileCardFormValidator.resetValidation();
+        profileCardForm.reset();
+      }
     }
   }
 }
