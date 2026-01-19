@@ -77,7 +77,7 @@ class FormValidator {
     const inputElements = [
       ...this._formElement.querySelectorAll(this._settings.inputSelector),
     ];
-    const submitButtonElement = formElement.querySelector(
+    const submitButtonElement = document.querySelector(
       this._settings.submitButtonSelector
     );
     inputElements.forEach((inputElement) => {

@@ -7,7 +7,7 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element = cardElement;
+    this._element = this.getTemplate();
     const cardImageEl = this._element.querySelector(".card__photo");
     const deleteButton = this._element.querySelector(".card__delete-button");
     const likeButton = this._element.querySelector(".card__like-button");
@@ -44,7 +44,6 @@ export default class Card {
     cardImageEl.src = this.link;
     cardImageEl.alt = this.name;
 
-    this._setEventListeners();
     return this._element;
   }
 }
