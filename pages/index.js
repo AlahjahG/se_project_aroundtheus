@@ -33,8 +33,6 @@ const initialCards = [
   },
 ];
 
-// Form Validation //
-
 // Constants //
 
 const cardsWrap = document.querySelector(".cards__list");
@@ -89,42 +87,28 @@ function handleEscUp(evt) {
   }
 }
 
-function renderCard(cardData, Wrapper) {
-  const card = new Card(cardData, cardTemplate);
-  const cardElement = card.getCardElement();
-  cardsWrap.prepend(cardElement);
+// Declare the variables for the preview modal in the global scope
+const previewImage = document.querySelector(".modal__image");
+const previewTitle = document.querySelector(".modal__image-title");
+
+function handleImageClick(name, link) {
+  previewImage.src = link;
+  previewTitle.textContent = name;
+  previewImage.alt = name;
+  openPopup(modalPreviewImage);
 }
 
-// Function to create a card element
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__photo");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-  const likeCardBtn = cardElement.querySelector(".card__like-button");
-  const deleteCardBtn = cardElement.querySelector(".card__delete-button");
-  const previewImage = document.querySelector(".modal__image");
-  const previewTitle = document.querySelector(".modal__image-title");
+// Function to render a card
 
-  cardImageEl.addEventListener("click", () => {
-    openPopup(modalPreviewImage);
-    previewImage.src = cardData.link;
-    previewTitle.textContent = cardData.name;
-    previewImage.alt = cardData.name;
-  });
-
-  deleteCardBtn.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  likeCardBtn.addEventListener("click", () => {
-    likeCardBtn.classList.toggle("card__like-button_active");
-  });
-
-  cardTitleEl.textContent = cardData.name;
-  cardImageEl.alt = cardData.name;
-  cardImageEl.src = cardData.link;
-
-  return cardElement;
+function renderCard(cardData, initialCards) {
+  const card = new Card(
+    cardData,
+    "#card__template",
+    handleImageClick,
+    initialCards
+  );
+  const cardElement = card.getView();
+  cardsWrap.prepend(cardElement);
 }
 
 // Event Handler //
@@ -174,7 +158,7 @@ profileCardFormValidator.enableValidation();
 profileEditBtn.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  profileEditFormValidator.resetValidation(profileEditForm);
+  profileEditFormValidator.resetValidation();
 
   openPopup(profileEditModal);
 });
@@ -188,18 +172,12 @@ closeProfileModal.addEventListener("click", () => {
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 profileCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
-});
-
 addCardBtn.addEventListener("click", () => {
   openPopup(profileCardModal);
 });
 
 profileCardCloseModal.addEventListener("click", () => {
   closePopup(profileCardModal);
-  profileCardFormValidator.resetValidation(profileCardForm);
   profileCardForm.reset();
 });
 

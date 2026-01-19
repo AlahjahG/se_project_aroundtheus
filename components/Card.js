@@ -6,7 +6,7 @@ export default class Card {
     this.handleImageClick = handleImageClick;
   }
 
-  _setEventListeners(cardElement) {
+  _setEventListeners() {
     this._element = cardElement;
     const cardImageEl = this._element.querySelector(".card__photo");
     const deleteButton = this._element.querySelector(".card__delete-button");
@@ -35,9 +35,6 @@ export default class Card {
       .querySelector(this.cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
-
-    // set event listeners
-    this._setEventListeners(cardElement);
   }
 
   getView() {
@@ -47,6 +44,7 @@ export default class Card {
     cardImageEl.src = this.link;
     cardImageEl.alt = this.name;
 
+    this._setEventListeners();
     return this._element;
   }
 }
