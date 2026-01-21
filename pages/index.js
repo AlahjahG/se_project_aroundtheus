@@ -83,14 +83,6 @@ function handleEscUp(evt) {
     const openedModal = document.querySelector(".modal_opened");
     if (openedModal) {
       closePopup(openedModal);
-
-      if (openedModal.id === "profile-edit-modal") {
-        profileEditFormValidator.resetValidation();
-        profileEditForm.reset();
-      } else if (openedModal.id === "profile-card-modal") {
-        profileCardFormValidator.resetValidation();
-        profileCardForm.reset();
-      }
     }
   }
 }
@@ -108,13 +100,8 @@ function handleImageClick(name, link) {
 
 // Function to render a card
 
-function renderCard(cardData, initialCards) {
-  const card = new Card(
-    cardData,
-    "#card__template",
-    handleImageClick,
-    initialCards
-  );
+function renderCard(cardData) {
+  const card = new Card(cardData, "#card__template", handleImageClick);
   const cardElement = card.getView();
   cardsWrap.prepend(cardElement);
 }
@@ -125,7 +112,6 @@ function handleProfileEditSubmit(e) {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closePopup(profileEditModal);
-  profileEditForm.reset();
 }
 
 function handleAddCardFormSubmit(e) {
@@ -136,7 +122,6 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link });
 
   closePopup(profileCardModal);
-  profileCardForm.reset();
 }
 
 // Form Validation //
@@ -173,8 +158,6 @@ profileEditBtn.addEventListener("click", () => {
 
 closeProfileModal.addEventListener("click", () => {
   closePopup(profileEditModal);
-  profileEditFormValidator.resetValidation(profileEditForm);
-  profileEditForm.reset();
 });
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
@@ -188,7 +171,6 @@ addCardBtn.addEventListener("click", () => {
 
 profileCardCloseModal.addEventListener("click", () => {
   closePopup(profileCardModal);
-  profileCardForm.reset();
 });
 
 closeModalPreviewBtn.addEventListener("click", () => {

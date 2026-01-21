@@ -74,16 +74,10 @@ class FormValidator {
   }
 
   resetValidation() {
-    const inputElements = [
-      ...this._formElement.querySelectorAll(this._settings.inputSelector),
-    ];
-    const submitButtonElement = document.querySelector(
-      this._settings.submitButtonSelector
-    );
-    inputElements.forEach((inputElement) => {
+    this._inputElements.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
-    this.toggleButtonState(this._submitButtonElement);
+    this.toggleButtonState();
   }
 
   enableValidation() {
