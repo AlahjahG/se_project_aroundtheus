@@ -1,37 +1,12 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
-
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
+import "../pages/index.css";
+import UserInfo from "../scripts/UserInfo.js";
+import Section from "../scripts/Section.js";
+import { initialCards } from "../utils/constants.js";
+import PopupWithForm from "../scripts/PopupWithForm.js";
+import Popup from "../scripts/Popup.js";
+import PopupWithImage from "../scripts/PopupWithImage.js";
 
 // Constants //
 
@@ -41,7 +16,7 @@ const addCardBtn = document.querySelector("#add-card-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileCardModal = document.querySelector("#profile-card-modal");
 const profileCardCloseModal = document.querySelector(
-  "#profile-close-card-modal"
+  "#profile-close-card-modal",
 );
 const closeProfileModal = document.querySelector("#profile-close-modal");
 const profileTitle = document.querySelector(".profile__title");
@@ -54,7 +29,7 @@ const cardDescriptionInput = document.querySelector("#card-description-input");
 const cardImageInput = document.querySelector("#card-image-input");
 const cardDescription = document.querySelector(".card__description");
 const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
+  "#profile-description-input",
 );
 
 const modalPreviewImage = document.querySelector("#profile-image-modal");
@@ -136,13 +111,13 @@ const validateSettings = {
 // Initialize form validators
 const profileEditFormValidator = new FormValidator(
   validateSettings,
-  profileEditForm
+  profileEditForm,
 );
 profileEditFormValidator.enableValidation();
 
 const profileCardFormValidator = new FormValidator(
   validateSettings,
-  profileCardForm
+  profileCardForm,
 );
 profileCardFormValidator.enableValidation();
 
@@ -184,3 +159,56 @@ document.querySelectorAll(".modal").forEach((modal) => {
     }
   });
 });
+
+// User Info instance
+
+const userInfo = new UserInfo({
+  nameSelector: ".profile__title",
+  aboutSelector: ".profile__description",
+});
+
+// section instance
+
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, "#card__template", handleImageClick);
+      const cardElement = card.getView();
+      cardSection.addItem(cardElement);
+    },
+  },
+  ".cards__list",
+);
+
+cardSection.renderItems();
+
+// Popup instance
+
+const imagePopup = new Popup("#profile-image-modal");
+imagePopup.setEventListeners();
+
+// PopupWithForm instance
+
+const newCardPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
+  // Handle form submission logic here, using the formData object
+});
+newCardPopup.open();
+
+newCardPopup.close();
+newCardPopup.setEventListeners();
+
+const editProfilePopup = new PopupWithForm(
+  "#profile-card-modal",
+  (formData) => {
+    // Handle form submission logic here, using the formData object
+  },
+);
+editProfilePopup.open();
+editProfilePopup.close();
+editProfilePopup.setEventListeners();
+
+// PopupWithImage instance
+
+const imagePopupWithImage = new PopupWithImage("#profile-image-modal");
+imagePopupWithImage.setEventListeners();
