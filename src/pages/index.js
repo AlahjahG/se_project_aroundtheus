@@ -43,24 +43,24 @@ const cardTemplate =
 
 // Function //
 
-function closePopup(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", handleEscUp);
-}
+// function closePopup(modal) {
+//   modal.classList.remove("modal_opened");
+//   document.removeEventListener("keydown", handleEscUp);
+// }
 
-function openPopup(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", handleEscUp);
-}
+// function openPopup(modal) {
+//   modal.classList.add("modal_opened");
+//   document.addEventListener("keydown", handleEscUp);
+// }
 
-function handleEscUp(evt) {
-  if (evt.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
-    if (openedModal) {
-      closePopup(openedModal);
-    }
-  }
-}
+// function handleEscUp(evt) {
+//   if (evt.key === "Escape") {
+//     const openedModal = document.querySelector(".modal_opened");
+//     if (openedModal) {
+//       closePopup(openedModal);
+//     }
+//   }
+// }
 
 // Declare the variables for the preview modal in the global scope
 const previewImage = document.querySelector(".modal__image");
@@ -75,11 +75,11 @@ function handleImageClick(name, link) {
 
 // Function to render a card
 
-function renderCard(cardData) {
-  const card = new Card(cardData, "#card__template", handleImageClick);
-  const cardElement = card.getView();
-  cardsWrap.prepend(cardElement);
-}
+// function renderCard(cardData) {
+//   const card = new Card(cardData, "#card__template", handleImageClick);
+//   const cardElement = card.getView();
+//   cardsWrap.prepend(cardElement);
+// }
 
 // Event Handler //
 function handleProfileEditSubmit(e) {
@@ -135,10 +135,10 @@ closeProfileModal.addEventListener("click", () => {
   closePopup(profileEditModal);
 });
 
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-profileCardForm.addEventListener("submit", handleAddCardFormSubmit);
+// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+// profileCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
-initialCards.forEach(renderCard);
+// initialCards.forEach(renderCard);
 
 addCardBtn.addEventListener("click", () => {
   openPopup(profileCardModal);
@@ -169,33 +169,29 @@ const userInfo = new UserInfo({
 
 // section instance
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, "#card__template", handleImageClick);
-      const cardElement = card.getView();
-      cardSection.addItem(cardElement);
-    },
+const cardSection = new Section({
+  items: initialCards,
+  containerSelector: ".cards__list",
+  renderer: (item) => {
+    const card = new Card(item, "#card__template", handleImageClick);
+    const cardElement = card.getView();
+    cardSection.addItem(cardElement);
   },
-  ".cards__list",
-);
-
+});
 cardSection.renderItems();
 
 // Popup instance
 
-const imagePopup = new Popup("#profile-image-modal");
+const imagePopup = new Popup("#profile-image-modal", handleImageClick);
 imagePopup.setEventListeners();
-
 // PopupWithForm instance
 
 const newCardPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
   // Handle form submission logic here, using the formData object
 });
-newCardPopup.open();
+// newCardPopup.open();
 
-newCardPopup.close();
+// newCardPopup.close();
 newCardPopup.setEventListeners();
 
 const editProfilePopup = new PopupWithForm(
