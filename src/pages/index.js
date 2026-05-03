@@ -70,7 +70,7 @@ function handleImageClick(name, link) {
   previewImage.src = link;
   previewTitle.textContent = name;
   previewImage.alt = name;
-  openPopup(modalPreviewImage);
+  imagePopup.open();
 }
 
 // Function to render a card
@@ -128,11 +128,11 @@ profileEditBtn.addEventListener("click", () => {
   profileDescriptionInput.value = profileDescription.textContent;
   profileEditFormValidator.resetValidation();
 
-  openPopup(profileEditModal);
+  editProfilePopup.open();
 });
 
 closeProfileModal.addEventListener("click", () => {
-  closePopup(profileEditModal);
+  newCardPopup.close();
 });
 
 // profileEditForm.addEventListener("submit", handleProfileEditSubmit);
@@ -141,15 +141,15 @@ closeProfileModal.addEventListener("click", () => {
 // initialCards.forEach(renderCard);
 
 addCardBtn.addEventListener("click", () => {
-  openPopup(profileCardModal);
+  newCardPopup.open();
 });
 
 profileCardCloseModal.addEventListener("click", () => {
-  closePopup(profileCardModal);
+  editProfilePopup.close();
 });
 
 closeModalPreviewBtn.addEventListener("click", () => {
-  closePopup(modalPreviewImage);
+  imagePopup.close();
 });
 
 document.querySelectorAll(".modal").forEach((modal) => {
@@ -188,21 +188,16 @@ imagePopup.setEventListeners();
 
 const newCardPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
   // Handle form submission logic here, using the formData object
+  newCardPopup.setEventListeners();
 });
-// newCardPopup.open();
-
-// newCardPopup.close();
-newCardPopup.setEventListeners();
 
 const editProfilePopup = new PopupWithForm(
   "#profile-card-modal",
   (formData) => {
+    editProfilePopup.setEventListeners();
     // Handle form submission logic here, using the formData object
   },
 );
-editProfilePopup.open();
-editProfilePopup.close();
-editProfilePopup.setEventListeners();
 
 // PopupWithImage instance
 
