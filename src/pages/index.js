@@ -1,12 +1,12 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import "../pages/index.css";
-import UserInfo from "../scripts/UserInfo.js";
-import Section from "../scripts/Section.js";
+import UserInfo from "../components/UserInfo.js";
+import Section from "../components/Section.js";
 import { initialCards } from "../utils/constants.js";
-import PopupWithForm from "../scripts/PopupWithForm.js";
-import Popup from "../scripts/Popup.js";
-import PopupWithImage from "../scripts/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import Popup from "../components/Popup.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 // Constants //
 
@@ -186,18 +186,20 @@ const imagePopup = new Popup("#profile-image-modal", handleImageClick);
 imagePopup.setEventListeners();
 // PopupWithForm instance
 
-const newCardPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
+const newCardPopup = new PopupWithForm(" #profile-card-modal", (formData) => {
   // Handle form submission logic here, using the formData object
-  newCardPopup.setEventListeners();
 });
 
+newCardPopup.setEventListeners();
+
 const editProfilePopup = new PopupWithForm(
-  "#profile-card-modal",
+  "#profile-edit-modal",
   (formData) => {
-    editProfilePopup.setEventListeners();
     // Handle form submission logic here, using the formData object
   },
 );
+
+editProfilePopup.setEventListeners();
 
 // PopupWithImage instance
 
