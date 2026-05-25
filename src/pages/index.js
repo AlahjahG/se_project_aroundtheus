@@ -152,14 +152,6 @@ closeModalPreviewBtn.addEventListener("click", () => {
   imagePopup.close();
 });
 
-document.querySelectorAll(".modal").forEach((modal) => {
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      closePopup(modal);
-    }
-  });
-});
-
 // User Info instance
 
 const userInfo = new UserInfo({
@@ -187,7 +179,12 @@ imagePopup.setEventListeners();
 // PopupWithForm instance
 
 const newCardPopup = new PopupWithForm(" #profile-card-modal", (formData) => {
-  // Handle form submission logic here, using the formData object
+  const name = formData["card-title-input"];
+  const link = formData["card-image-input"];
+  const cardData = { name, link };
+  const card = new Card(cardData, "#card__template", handleImageClick);
+  const cardElement = card.getView();
+  cardSection.addItem(cardElement);
 });
 
 newCardPopup.setEventListeners();
@@ -195,7 +192,10 @@ newCardPopup.setEventListeners();
 const editProfilePopup = new PopupWithForm(
   "#profile-edit-modal",
   (formData) => {
-    // Handle form submission logic here, using the formData object
+    userInfo.setUserInfo({
+      name: formData["profile-title-input"],
+      about: formData["profile-description-input"],
+    });
   },
 );
 
