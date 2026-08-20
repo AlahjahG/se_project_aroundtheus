@@ -7,7 +7,30 @@ import { initialCards } from "../utils/constants.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import Api from "../components/Api.js";
 
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "fab1123a-2719-4ac9-92b1-75f431aa66e0",
+    "Content-Type": "application/json",
+  },
+});
+
+api.getAppInfo().then(([cardsData, userData]) => {
+  console.log("Cards Data:", cardsData);
+  console.log("User Data:", userData);
+
+  userInfo.setUserInfo({
+    name: userData.name,
+    about: userData.about,
+  });
+});
+
+api.setUserInfo({
+  name: "Alahjah",
+  about: "Filmmaker and Developer",
+});
 // Constants //
 
 const cardsWrap = document.querySelector(".cards__list");
