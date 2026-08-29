@@ -3,7 +3,7 @@ import Card from "../components/Card.js";
 import "../pages/index.css";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
-import { initialCards } from "../utils/constants.js";
+// import { initialCards } from "../utils/constants.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -17,20 +17,63 @@ const api = new Api({
   },
 });
 
-api.getAppInfo().then(([cardsData, userData]) => {
-  console.log("Cards Data:", cardsData);
-  console.log("User Data:", userData);
+let cardSection;
 
+api.getAppInfo().then(([cardsData, userData]) => {
   userInfo.setUserInfo({
     name: userData.name,
     about: userData.about,
   });
+
+  cardSection = new Section({
+    items: cardsData,
+    containerSelector: ".cards__list",
+    renderer: (item) => {
+      const card = new Card(
+        item,
+        "#card__template",
+        handleImageClick,
+        handleDeleteClick,
+      );
+
+      const cardElement = card.getView();
+      cardSection.addItem(cardElement);
+    },
+  });
+
+  cardSection.renderItems();
 });
 
-api.setUserInfo({
-  name: "Alahjah",
-  about: "Filmmaker and Developer",
-});
+// api.setUserInfo({
+//   name: "Alahjah",
+//   about: "Filmmaker and Developer",
+// });
+
+// api.addNewCard({
+//   name: "Lago di Braies",
+//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+// });
+
+// api
+//   .addNewCard(cardData)
+//   .then((newCardData) => {
+//     const card = new Card(newCardData, "#card__template", handleImageClick);
+
+//     const cardElement = card.getView();
+
+//     cardSection.addItem(cardElement);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
+
+// api
+//   .deleteCard(card._id)
+//   .then(() => {
+//     card.removeCard();
+//   })
+//   .catch(console.error);
+
 // Constants //
 
 const cardsWrap = document.querySelector(".cards__list");
@@ -63,6 +106,7 @@ const profileEditForm = profileEditModal.querySelector(".modal__form");
 const profileCardForm = profileCardModal.querySelector(".modal__form");
 const cardTemplate =
   document.querySelector("#card__template").content.firstElementChild;
+const deleteCardModal = document.querySelector("#delete-card-modal");
 
 // Function //
 
@@ -120,6 +164,13 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link });
 
   closePopup(profileCardModal);
+}
+
+let cardToDelete = null;
+
+function handleDeleteClick(card) {
+  cardToDelete = card;
+  deleteCardPopup.open();
 }
 
 // Form Validation //
@@ -184,30 +235,44 @@ const userInfo = new UserInfo({
 
 // section instance
 
-const cardSection = new Section({
-  items: initialCards,
-  containerSelector: ".cards__list",
-  renderer: (item) => {
-    const card = new Card(item, "#card__template", handleImageClick);
-    const cardElement = card.getView();
-    cardSection.addItem(cardElement);
-  },
-});
-cardSection.renderItems();
+// const cardSection = new Section({
+//   items: cardsData,
+//   containerSelector: ".cards__list",
+//   renderer: (item) => {
+//     const card = new Card(item, "#card__template", handleImageClick);
+//     const cardElement = card.getView();
+//     cardSection.addItem(cardElement);
+//   },
+// });
+// cardSection.renderItems();
 
 // Popup instance
 
-const imagePopup = new Popup("#profile-image-modal", handleImageClick);
-imagePopup.setEventListeners();
-// PopupWithForm instance
-
-const newCardPopup = new PopupWithForm(" #profile-card-modal", (formData) => {
+const newCardPopup = new PopupWithForm("#profile-card-modal", (formData) => {
   const name = formData["title"];
   const link = formData["description"];
+
   const cardData = { name, link };
-  const card = new Card(cardData, "#card__template", handleImageClick);
-  const cardElement = card.getView();
-  cardSection.addItem(cardElement);
+
+  api
+    .addNewCard(cardData)
+    .then((newCardData) => {
+      const card = new Card(
+        newCardData,
+        "#card__template",
+        handleImageClick,
+        handleDeleteClick,
+      );
+
+      const cardElement = card.getView();
+
+      cardSection.addItem(cardElement);
+
+      newCardPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 });
 
 newCardPopup.setEventListeners();
@@ -228,3 +293,19 @@ editProfilePopup.setEventListeners();
 
 const imagePopupWithImage = new PopupWithImage("#profile-image-modal");
 imagePopupWithImage.setEventListeners();
+
+// Delete Card Popup instance
+const deleteCardPopup = new PopupWithForm("#card-delete-modal", () => {
+  api
+    .deleteCard(cardToDelete._id)
+    .then(() => {
+      cardToDelete.removeCard();
+      deleteCardPopup.close();
+      cardToDelete = null;
+    })
+    .catch((error) => {
+      console.error("Error deleting card:", error);
+    });
+});
+
+deleteCardPopup.setEventListeners();
