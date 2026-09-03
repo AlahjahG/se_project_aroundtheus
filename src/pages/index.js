@@ -34,6 +34,7 @@ api.getAppInfo().then(([cardsData, userData]) => {
         "#card__template",
         handleImageClick,
         handleDeleteClick,
+        handleLikeClick,
       );
 
       const cardElement = card.getView();
@@ -107,6 +108,9 @@ const profileCardForm = profileCardModal.querySelector(".modal__form");
 const cardTemplate =
   document.querySelector("#card__template").content.firstElementChild;
 const deleteCardModal = document.querySelector("#delete-card-modal");
+// Avatar Edit Button event listener
+const avatarEditButton = document.querySelector("#profile-avatar-edit-button");
+const profileAvatar = document.querySelector(".profile__avatar");
 
 // Function //
 
@@ -166,6 +170,29 @@ function handleAddCardFormSubmit(e) {
   closePopup(profileCardModal);
 }
 
+function handleLikeClick(card) {
+  const cardId = card._id;
+  const isLiked = card.isLiked; // Assuming you have a property to track the like state
+  if (!card.isLiked) {
+    api
+      .likeCard(cardId)
+      .then((updatedCard) => {
+        card.setLikeState(updatedCard.isLiked); // Update the like state of the card
+      })
+      .catch((error) => {
+        console.error("Error liking card:", error);
+      });
+  } else {
+    api
+      .unlikeCard(cardId)
+      .then((updatedCard) => {
+        card.setLikeState(updatedCard.isLiked); // Update the like state of the card
+      })
+      .catch((error) => {
+        console.error("Error unliking card:", error);
+      });
+  }
+}
 let cardToDelete = null;
 
 function handleDeleteClick(card) {
@@ -231,6 +258,7 @@ closeModalPreviewBtn.addEventListener("click", () => {
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   aboutSelector: ".profile__description",
+  avatarSelector: ".profile__avatar",
 });
 
 // section instance
@@ -262,6 +290,7 @@ const newCardPopup = new PopupWithForm("#profile-card-modal", (formData) => {
         "#card__template",
         handleImageClick,
         handleDeleteClick,
+        handleLikeClick,
       );
 
       const cardElement = card.getView();
@@ -294,8 +323,38 @@ editProfilePopup.setEventListeners();
 const imagePopupWithImage = new PopupWithImage("#profile-image-modal");
 imagePopupWithImage.setEventListeners();
 
+// Avatar Edit Popup instance
+
+const avatarEditPopup = new PopupWithForm(
+  "#profile-avatar-modal",
+  (formData) => {
+    const avatarLink = formData["avatar"];
+    api
+      .updateUserAvatar({ avatar: avatarLink })
+      .then((updatedUserData) => {
+        userInfo.setUserAvatar(updatedUserData.avatar);
+        avatarEditPopup.close();
+      })
+      .catch((error) => {
+        console.error("Error updating avatar:", error);
+      });
+  },
+);
+
+avatarEditPopup.setEventListeners();
+avatarEditButton.addEventListener("click", () => {
+  avatarEditPopup.open();
+});
+
 // Delete Card Popup instance
+
 const deleteCardPopup = new PopupWithForm("#card-delete-modal", () => {
+  const selectedCard = cardToDelete;
+
+  if (!selectedCard) {
+    return;
+  }
+
   api
     .deleteCard(cardToDelete._id)
     .then(() => {

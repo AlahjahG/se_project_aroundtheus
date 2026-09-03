@@ -19,7 +19,9 @@
   width: 24px;
   grid-area: button;
   border: 1px #ffff;
-  cursor: url(../images/Cursor_1.svg) 1 2, pointer;
+  cursor:
+    url(../images/Cursor_1.svg) 1 2,
+    pointer;
 }
 
 .profile__edit-button:hover {
@@ -34,11 +36,39 @@
   border-radius: 2px;
   border: 2px solid #ffff;
   padding-bottom: 36px;
-  cursor: url(../images/Cursor_1.svg) 1 2, pointer;
+  cursor:
+    url(../images/Cursor_1.svg) 1 2,
+    pointer;
 }
 
 .profile__add-button:hover {
   opacity: 60%;
+}
+
+.profile__avatar-container {
+  position: relative;
+}
+
+.profile__avatar-edit-button {
+  background: transparent url(../images/Edit-button-Avatar.svg) center no-repeat;
+  height: 120px;
+  width: 120px;
+  border: none;
+  border-radius: 50%;
+  cursor:
+    url(../images/Cursor_1.svg) 1 2,
+    pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+.profile__avatar-container:hover .profile__avatar-edit-button {
+  opacity: 1;
+}
+.profile__avatar-container:hover .profile__avatar {
+  opacity: 0.5;
 }
 
 .profile__title {
