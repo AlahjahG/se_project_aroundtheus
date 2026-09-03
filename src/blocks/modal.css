@@ -11,7 +11,9 @@
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.5s ease-in, visibility 0s 0.5s;
+  transition:
+    opacity 0.5s ease-in,
+    visibility 0s 0.5s;
   visibility: hidden;
 }
 
@@ -171,6 +173,17 @@
   height: 60px;
 
   position: relative;
+}
+
+.modal__container-delete {
+  display: flex;
+  width: 430px;
+  height: 181px;
+  padding: 0;
+}
+
+.modal__button_delete {
+  margin-top: -30px;
 }
 
 @media screen and (max-width: 660px) {

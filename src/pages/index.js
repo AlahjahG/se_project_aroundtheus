@@ -3,10 +3,77 @@ import Card from "../components/Card.js";
 import "../pages/index.css";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
-import { initialCards } from "../utils/constants.js";
+// import { initialCards } from "../utils/constants.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import Api from "../components/Api.js";
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "fab1123a-2719-4ac9-92b1-75f431aa66e0",
+    "Content-Type": "application/json",
+  },
+});
+
+let cardSection;
+
+api.getAppInfo().then(([cardsData, userData]) => {
+  userInfo.setUserInfo({
+    name: userData.name,
+    about: userData.about,
+  });
+
+  cardSection = new Section({
+    items: cardsData,
+    containerSelector: ".cards__list",
+    renderer: (item) => {
+      const card = new Card(
+        item,
+        "#card__template",
+        handleImageClick,
+        handleDeleteClick,
+        handleLikeClick,
+      );
+
+      const cardElement = card.getView();
+      cardSection.addItem(cardElement);
+    },
+  });
+
+  cardSection.renderItems();
+});
+
+// api.setUserInfo({
+//   name: "Alahjah",
+//   about: "Filmmaker and Developer",
+// });
+
+// api.addNewCard({
+//   name: "Lago di Braies",
+//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+// });
+
+// api
+//   .addNewCard(cardData)
+//   .then((newCardData) => {
+//     const card = new Card(newCardData, "#card__template", handleImageClick);
+
+//     const cardElement = card.getView();
+
+//     cardSection.addItem(cardElement);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
+
+// api
+//   .deleteCard(card._id)
+//   .then(() => {
+//     card.removeCard();
+//   })
+//   .catch(console.error);
 
 // Constants //
 
@@ -40,6 +107,10 @@ const profileEditForm = profileEditModal.querySelector(".modal__form");
 const profileCardForm = profileCardModal.querySelector(".modal__form");
 const cardTemplate =
   document.querySelector("#card__template").content.firstElementChild;
+const deleteCardModal = document.querySelector("#delete-card-modal");
+// Avatar Edit Button event listener
+const avatarEditButton = document.querySelector("#profile-avatar-edit-button");
+const profileAvatar = document.querySelector(".profile__avatar");
 
 // Function //
 
@@ -97,6 +168,36 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link });
 
   closePopup(profileCardModal);
+}
+
+function handleLikeClick(card) {
+  const cardId = card._id;
+  const isLiked = card.isLiked; // Assuming you have a property to track the like state
+  if (!card.isLiked) {
+    api
+      .likeCard(cardId)
+      .then((updatedCard) => {
+        card.setLikeState(updatedCard.isLiked); // Update the like state of the card
+      })
+      .catch((error) => {
+        console.error("Error liking card:", error);
+      });
+  } else {
+    api
+      .unlikeCard(cardId)
+      .then((updatedCard) => {
+        card.setLikeState(updatedCard.isLiked); // Update the like state of the card
+      })
+      .catch((error) => {
+        console.error("Error unliking card:", error);
+      });
+  }
+}
+let cardToDelete = null;
+
+function handleDeleteClick(card) {
+  cardToDelete = card;
+  deleteCardPopup.open();
 }
 
 // Form Validation //
@@ -157,34 +258,50 @@ closeModalPreviewBtn.addEventListener("click", () => {
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   aboutSelector: ".profile__description",
+  avatarSelector: ".profile__avatar",
 });
 
 // section instance
 
-const cardSection = new Section({
-  items: initialCards,
-  containerSelector: ".cards__list",
-  renderer: (item) => {
-    const card = new Card(item, "#card__template", handleImageClick);
-    const cardElement = card.getView();
-    cardSection.addItem(cardElement);
-  },
-});
-cardSection.renderItems();
+// const cardSection = new Section({
+//   items: cardsData,
+//   containerSelector: ".cards__list",
+//   renderer: (item) => {
+//     const card = new Card(item, "#card__template", handleImageClick);
+//     const cardElement = card.getView();
+//     cardSection.addItem(cardElement);
+//   },
+// });
+// cardSection.renderItems();
 
 // Popup instance
 
-const imagePopup = new Popup("#profile-image-modal", handleImageClick);
-imagePopup.setEventListeners();
-// PopupWithForm instance
-
-const newCardPopup = new PopupWithForm(" #profile-card-modal", (formData) => {
+const newCardPopup = new PopupWithForm("#profile-card-modal", (formData) => {
   const name = formData["title"];
   const link = formData["description"];
+
   const cardData = { name, link };
-  const card = new Card(cardData, "#card__template", handleImageClick);
-  const cardElement = card.getView();
-  cardSection.addItem(cardElement);
+
+  api
+    .addNewCard(cardData)
+    .then((newCardData) => {
+      const card = new Card(
+        newCardData,
+        "#card__template",
+        handleImageClick,
+        handleDeleteClick,
+        handleLikeClick,
+      );
+
+      const cardElement = card.getView();
+
+      cardSection.addItem(cardElement);
+
+      newCardPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 });
 
 newCardPopup.setEventListeners();
@@ -205,3 +322,49 @@ editProfilePopup.setEventListeners();
 
 const imagePopupWithImage = new PopupWithImage("#profile-image-modal");
 imagePopupWithImage.setEventListeners();
+
+// Avatar Edit Popup instance
+
+const avatarEditPopup = new PopupWithForm(
+  "#profile-avatar-modal",
+  (formData) => {
+    const avatarLink = formData["avatar"];
+    api
+      .updateUserAvatar({ avatar: avatarLink })
+      .then((updatedUserData) => {
+        userInfo.setUserAvatar(updatedUserData.avatar);
+        avatarEditPopup.close();
+      })
+      .catch((error) => {
+        console.error("Error updating avatar:", error);
+      });
+  },
+);
+
+avatarEditPopup.setEventListeners();
+avatarEditButton.addEventListener("click", () => {
+  avatarEditPopup.open();
+});
+
+// Delete Card Popup instance
+
+const deleteCardPopup = new PopupWithForm("#card-delete-modal", () => {
+  const selectedCard = cardToDelete;
+
+  if (!selectedCard) {
+    return;
+  }
+
+  api
+    .deleteCard(cardToDelete._id)
+    .then(() => {
+      cardToDelete.removeCard();
+      deleteCardPopup.close();
+      cardToDelete = null;
+    })
+    .catch((error) => {
+      console.error("Error deleting card:", error);
+    });
+});
+
+deleteCardPopup.setEventListeners();
