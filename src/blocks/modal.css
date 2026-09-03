@@ -182,6 +182,10 @@
   padding: 0;
 }
 
+.modal__button_delete {
+  margin-top: -30px;
+}
+
 @media screen and (max-width: 660px) {
   .modal__container {
     width: 282px;

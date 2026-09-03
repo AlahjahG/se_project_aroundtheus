@@ -73,14 +73,14 @@ class Api {
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this.headers,
-    }).then(this._checkResponse);
+    });
   }
 
   unlikeCard(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this.headers,
-    }).then(this._checkResponse);
+    });
   }
 
   _checkResponse(res) {
@@ -95,13 +95,7 @@ class Api {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({ avatar: avatarUrl }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._checkResponse);
   }
 
   getAppInfo() {
